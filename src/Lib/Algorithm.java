@@ -18,7 +18,7 @@ public class Algorithm {
 		for(Move move: Moves) {
 			retval[i] = move.get();
 			i++;
-		}
+		} 
 		return retval;
 	}
 }

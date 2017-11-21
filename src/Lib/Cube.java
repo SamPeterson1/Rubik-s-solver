@@ -75,9 +75,9 @@ public class Cube {
 			face = value - 7;
 			direction = 1;
 		} else if(value < 19) {
-			face = value - 13;
+			face = value - 13; 
 			direction = 2;
-		}
+		}  
 		if(direction == 0) {
 			int[][] i = this.rotateCW(this.colorData[face], 1);
 			this.colorData[face] = Arrays.copyOf(i, i.length);

@@ -35,7 +35,7 @@ public class Move {
 				return Cube.BOTTOM_FACE_CC;
 			default:
 				System.err.println("Invalid Notation");
-				return 5;
+				return 5; 
 		}
 	}
 }

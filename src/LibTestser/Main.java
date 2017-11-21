@@ -14,7 +14,7 @@ public class Main {
 		int[] moves2 = alg.getMoves();
 		
 		cube.excecuteMove(moves2[0]);
-		for(int i = 0; i < 6; i ++) {
+		for(int i = 0; i < 6; i ++) { 
 			System.out.println(" ");
 			for(int j = 0; j < 3; j ++) {
 				System.out.println(" ");
@@ -26,3 +26,4 @@ public class Main {
 		System.out.println(cube.getCube());
 	}
 }
+ 
