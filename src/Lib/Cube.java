@@ -93,64 +93,183 @@ public class Cube {
 	}
 	
 	public void excecuteAlg(Algorithm alg) {
-		
+		int[] data = alg.getMoves();
+		for(int i = 0; i < data.length; i ++) {
+			this.excecuteMove(data[i]);
+		}
 	}
 	
 	public void excecuteMove(int value) {
 		int face = 0;
 		int direction = 0;
+		int sliceMove = 0;
+		boolean basicMove = true;
 		if(value < 7) {
 			face = value - 1;
 			direction = 0;
+			
 		} else if(value < 13) {
 			face = value - 7;
 			direction = 1;
+			System.out.println("LOLOL");
 		} else if(value < 19) {
 			face = value - 13; 
 			direction = 2;
-		} 
-		int iterations = 1,k = 1;
-		if(direction == 1) k += 2;
-		if(direction == 2) iterations ++;
-		for(int i = 0; i < iterations; i ++) {
-			colorData[face] = this.rotateCW(colorData[face], k);
-			if(face == 0) {
-				if(direction == 0) {
-					this.setCube(Map.applyMap(this.getCube(), Map.upClockwiseMap));
-				} else {
-					this.setCube(Map.applyMap(this.getCube(), Map.upCounterClockwiseMap));
+		} else if(value < 22){
+			basicMove = false;
+			face = -1;
+			sliceMove = value - 19;
+		} else if(value < 25) {
+			basicMove = false;
+			face = -1;
+			sliceMove = value - 22;
+			direction = 1;
+		} else if(value < 28) {
+			basicMove = false;
+			face = -1;
+			sliceMove = value - 25;
+			direction = 2;
+		} else if(value < 34) {
+			basicMove = false;
+			face = value - 28;
+			direction = 0;
+		} else if(value < 40) {
+			basicMove = false;
+			face = value - 34;
+			direction = 1;
+		} else if(value < 46) {
+			basicMove = false;
+			face = value - 40;
+			direction = 2;
+		}
+		if(basicMove) {
+			int iterations = 1,k = 1;
+			if(direction == 1) k += 2;
+			if(direction == 2) iterations ++;
+			for(int i = 0; i < iterations; i ++) {
+				colorData[face] = this.rotateCW(colorData[face], k);
+				if(face == 0) {
+					if(direction == 0) {
+						this.setCube(Map.applyMap(this.getCube(), Map.upClockwiseMap));
+					} else {
+						this.setCube(Map.applyMap(this.getCube(), Map.upCounterClockwiseMap));
+					}
+				} else if(face == 1) {
+					System.out.println("HIijijijiiiiiiii");
+					if(direction == 0) {
+						this.setCube(Map.applyMap(this.getCube(), Map.rightClockwiseMap));
+					} else {
+						this.setCube(Map.applyMap(this.getCube(), Map.rightCounterClockwiseMap));
+					}
+				} else if(face == 2) {
+					if(direction == 0) {
+						this.setCube(Map.applyMap(this.getCube(), Map.frontClockwiseMap));
+					} else {
+						this.setCube(Map.applyMap(this.getCube(), Map.frontCounterClockwiseMap));
+					}
+				} else if(face == 3) {
+					if(direction == 0) {
+						this.setCube(Map.applyMap(this.getCube(), Map.leftClockwiseMap));
+					} else {
+						this.setCube(Map.applyMap(this.getCube(), Map.leftCounterClockwiseMap));
+					}
+				} else if(face == 4) {
+					if(direction == 0) {
+						this.setCube(Map.applyMap(this.getCube(), Map.backClockwiseMap));
+					} else {
+						this.setCube(Map.applyMap(this.getCube(), Map.backCounterClockwiseMap));
+					}
+				} else if(face == 5) {
+					if(direction == 0) {
+						this.setCube(Map.applyMap(this.getCube(), Map.downClockwiseMap));
+					} else {
+						System.out.println("HII" + face);
+						this.setCube(Map.applyMap(this.getCube(), Map.downCounterClockwiseMap));
+					}
+				} 
+			}
+		} else if(face == -1){
+			int iterations = 1,k = 1;
+			if(direction == 1) k += 2;
+			if(direction == 2) iterations ++;
+			for(int i = 0; i < iterations; i ++) {
+				if(sliceMove == 0) {
+					if(direction == 0) {
+						this.setCube(Map.applyMap(this.getCube(), Map.middleSliceClockwiseMap));
+					} else {
+						this.setCube(Map.applyMap(this.getCube(), Map.middleSliceCounterClockwiseMap));
+					}
+				} else if(sliceMove == 1) {
+					if(direction == 0) {
+						this.setCube(Map.applyMap(this.getCube(), Map.equatorSliceClockwiseMap));
+					} else {
+						this.setCube(Map.applyMap(this.getCube(), Map.equatorSliceCounterClockwiseMap));
+					}
+				} else if(sliceMove == 2) {
+					if(direction == 0) {
+						this.setCube(Map.applyMap(this.getCube(), Map.sideSliceClockwiseMap));
+					} else {
+						this.setCube(Map.applyMap(this.getCube(), Map.sideSliceCounterClockwiseMap));
+					}
 				}
-			} else if(face == 1) {
-				if(direction == 0) {
-					this.setCube(Map.applyMap(this.getCube(), Map.rightClockwiseMap));
-				} else {
-					this.setCube(Map.applyMap(this.getCube(), Map.rightCounterClockwiseMap));
-				}
-			} else if(face == 2) {
-				if(direction == 0) {
-					this.setCube(Map.applyMap(this.getCube(), Map.frontClockwiseMap));
-				} else {
-					this.setCube(Map.applyMap(this.getCube(), Map.frontCounterClockwiseMap));
-				}
-			} else if(face == 3) {
-				if(direction == 0) {
-					this.setCube(Map.applyMap(this.getCube(), Map.leftClockwiseMap));
-				} else {
-					this.setCube(Map.applyMap(this.getCube(), Map.leftCounterClockwiseMap));
-				}
-			} else if(face == 4) {
-				if(direction == 0) {
-					this.setCube(Map.applyMap(this.getCube(), Map.backClockwiseMap));
-				} else {
-					this.setCube(Map.applyMap(this.getCube(), Map.backCounterClockwiseMap));
-				}
-			} else if(face == 5) {
-				if(direction == 1) {
-					this.setCube(Map.applyMap(this.getCube(), Map.downClockwiseMap));
-				} else {
-					this.setCube(Map.applyMap(this.getCube(), Map.downCounterClockwiseMap));
-				}
-			} 
+			}
+		} else {
+			int iterations = 1,k = 1;
+			if(direction == 1) k += 2;
+			if(direction == 2) iterations ++;
+			for(int i = 0; i < iterations; i ++) {
+				colorData[face] = this.rotateCW(colorData[face], k);
+				if(face == 0) {
+					if(direction == 0) {
+						this.setCube(Map.applyMap(this.getCube(), Map.upClockwiseMap));
+						this.setCube(Map.applyMap(this.getCube(), Map.equatorSliceClockwiseMap));
+					} else {
+						this.setCube(Map.applyMap(this.getCube(), Map.upCounterClockwiseMap));
+						this.setCube(Map.applyMap(this.getCube(), Map.equatorSliceCounterClockwiseMap));
+					}
+				} else if(face == 1) {
+					if(direction == 0) {
+						this.setCube(Map.applyMap(this.getCube(), Map.rightClockwiseMap));
+						this.setCube(Map.applyMap(this.getCube(), Map.middleSliceClockwiseMap));
+					} else {
+						this.setCube(Map.applyMap(this.getCube(), Map.rightCounterClockwiseMap));
+						this.setCube(Map.applyMap(this.getCube(), Map.middleSliceCounterClockwiseMap));
+					}
+				} else if(face == 2) {
+					if(direction == 0) {
+						this.setCube(Map.applyMap(this.getCube(), Map.frontClockwiseMap));
+						this.setCube(Map.applyMap(this.getCube(), Map.sideSliceClockwiseMap));
+					} else {
+						this.setCube(Map.applyMap(this.getCube(), Map.frontCounterClockwiseMap));
+						this.setCube(Map.applyMap(this.getCube(), Map.sideSliceCounterClockwiseMap));
+					}
+				} else if(face == 3) {
+					if(direction == 0) {
+						this.setCube(Map.applyMap(this.getCube(), Map.leftClockwiseMap));
+						this.setCube(Map.applyMap(this.getCube(), Map.middleSliceCounterClockwiseMap));
+					} else {
+						this.setCube(Map.applyMap(this.getCube(), Map.leftCounterClockwiseMap));
+						this.setCube(Map.applyMap(this.getCube(), Map.middleSliceClockwiseMap));
+					}
+				} else if(face == 4) {
+					if(direction == 0) {
+						this.setCube(Map.applyMap(this.getCube(), Map.backClockwiseMap));
+						this.setCube(Map.applyMap(this.getCube(), Map.sideSliceCounterClockwiseMap));
+					} else {
+						this.setCube(Map.applyMap(this.getCube(), Map.backCounterClockwiseMap));
+						this.setCube(Map.applyMap(this.getCube(), Map.sideSliceClockwiseMap));
+					}
+				} else if(face == 5) {
+					if(direction == 0) {
+						this.setCube(Map.applyMap(this.getCube(), Map.downClockwiseMap));
+						this.setCube(Map.applyMap(this.getCube(), Map.equatorSliceCounterClockwiseMap));
+					} else {
+						System.out.println("HII" + face);
+						this.setCube(Map.applyMap(this.getCube(), Map.downCounterClockwiseMap));
+						this.setCube(Map.applyMap(this.getCube(), Map.equatorSliceClockwiseMap));
+					}
+				} 
+			}
 		}
 	}
 	

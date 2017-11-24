@@ -7,6 +7,24 @@ public class Move {
 		this.Notation = Notation;
 	}
 	
+	public void setMove(String move) {
+		this.Notation = move;
+	}
+	
+	public String getNotation() {	
+		return this.Notation;
+	}
+	public String getInverse(String move) {
+		String retVal = move;
+		if(Notation.contains("'")) {
+			retVal = retVal.replace("'", "");
+		} else if(!retVal.contains("2")){
+			retVal += "'";
+			System.out.println("MAYBEEE");
+		}
+		return retVal;
+	}
+	
 	public int get() {
 		switch(this.Notation) {
 			case "U":
