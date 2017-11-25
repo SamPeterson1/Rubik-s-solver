@@ -1,6 +1,7 @@
 package Lib;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class FaceUtils {
 	private Edge edge1, edge2, edge3, edge4;
@@ -9,32 +10,44 @@ public class FaceUtils {
 	private ArrayList<Edge> edges = new ArrayList<Edge>();
 	private ArrayList<Corner> corners = new ArrayList<Corner>();
 	
+	int[] edgeCoords = null;
+	int[] surroundingFaces = null;
+	
+	
 	private int center = 0;
 	
 	private int face = 0;
 	
-	public FaceUtils(int face, int[] surroundingFaces, int[][][] cube) {
+	public FaceUtils(int face, int[] surroundingFaces, int[][][] cube, int[] edgeCoords) {
 		this.face = face;
 		
+		/*
+		 * 
+		 * 	int[] i2 = {1,5,3,0};
+		 * 	int[] coords = {1,0,0,1,1,2,2,1};
+		 * 
+		*/
+		this.edgeCoords = Arrays.copyOf(edgeCoords, edgeCoords.length);
+		this.surroundingFaces = Arrays.copyOf(surroundingFaces, surroundingFaces.length);
 		center = cube[face][1][1];
 		int[] edgeColors = new int[2];
 		int[] cornerColors = new int[3];
 		
 		edgeColors[0] = cube[face][0][1];
-		edgeColors[1] = cube[surroundingFaces[0]][0][1];
-		edge1 = new Edge(edgeColors);
+		edgeColors[1] = cube[surroundingFaces[0]][edgeCoords[0]][edgeCoords[1]];
+		edge1 = new Edge(edgeColors,0);
 		
 		edgeColors[0] = cube[face][1][2];
-		edgeColors[1] = cube[surroundingFaces[1]][0][1];
-		edge2 = new Edge(edgeColors);
+		edgeColors[1] = cube[surroundingFaces[1]][edgeCoords[2]][edgeCoords[3]];
+		edge2 = new Edge(edgeColors,1);
 		
 		edgeColors[0] = cube[face][2][1];
-		edgeColors[1] = cube[surroundingFaces[2]][0][1];
-		edge3 = new Edge(edgeColors);
+		edgeColors[1] = cube[surroundingFaces[2]][edgeCoords[4]][edgeCoords[5]];
+		edge3 = new Edge(edgeColors,2);
 		
 		edgeColors[0] = cube[face][1][0];
-		edgeColors[1] = cube[surroundingFaces[3]][0][1];
-		edge4 = new Edge(edgeColors);
+		edgeColors[1] = cube[surroundingFaces[3]][edgeCoords[6]][edgeCoords[7]];
+		edge4 = new Edge(edgeColors,3);
 		
 		edges.add(edge1);
 		edges.add(edge2);
@@ -74,6 +87,47 @@ public class FaceUtils {
 			System.out.println(corner.getColors()[0] + " " + corner.getColors()[1] + " " + corner.getColors()[2]);
 		}
 	}
+	public void updateUtil(int[][][] cube) {
+		int[] edgeColors = new int[2];
+		int[] cornerColors = new int[3];
+		
+		edgeColors[0] = cube[face][0][1];
+		edgeColors[1] = cube[surroundingFaces[0]][edgeCoords[0]][edgeCoords[1]];
+		edge1.setColors(edgeColors);
+		
+		edgeColors[0] = cube[face][1][2];
+		edgeColors[1] = cube[surroundingFaces[1]][edgeCoords[2]][edgeCoords[3]];
+		edge2.setColors(edgeColors);
+		
+		edgeColors[0] = cube[face][2][1];
+		edgeColors[1] = cube[surroundingFaces[2]][edgeCoords[4]][edgeCoords[5]];
+		edge3.setColors(edgeColors);
+		
+		edgeColors[0] = cube[face][1][0];
+		edgeColors[1] = cube[surroundingFaces[3]][edgeCoords[6]][edgeCoords[7]];
+		edge4.setColors(edgeColors);
+		
+		
+		cornerColors[0] = cube[face][2][2];
+		cornerColors[1] = cube[surroundingFaces[0]][0][0];
+		cornerColors[2] = cube[surroundingFaces[1]][0][2];
+		corner1 = new Corner(cornerColors);
+		
+		cornerColors[0] = cube[face][2][0];
+		cornerColors[1] = cube[surroundingFaces[1]][0][0];
+		cornerColors[2] = cube[surroundingFaces[2]][0][2];
+		corner2 = new Corner(cornerColors);
+		
+		cornerColors[0] = cube[face][0][0];
+		cornerColors[1] = cube[surroundingFaces[2]][0][0];
+		cornerColors[2] = cube[surroundingFaces[3]][0][2];
+		corner3 = new Corner(cornerColors);
+		
+		cornerColors[0] = cube[face][0][2];
+		cornerColors[1] = cube[surroundingFaces[3]][0][0];
+		cornerColors[2] = cube[surroundingFaces[0]][0][2];
+		corner4 = new Corner(cornerColors);
+	}
 	public int findEdge(int[] colors) {
 		int i = 0;
 		for(Edge edge: edges) {
@@ -83,6 +137,29 @@ public class FaceUtils {
 			i ++;
 		}
 		return -1;
+	}
+	
+	public int fineEdgeColor(int color) {
+		for(Edge edge: edges) {
+			if(edge.matchesColor(color)) {
+				return edge.getID();
+			}
+		}
+		return -1;
+	}
+	
+	public boolean isEdgePresent(int color, int edge) {
+		int index = 0;
+		for(Edge edge1: edges) {
+			if(edge1.getID() == edge) {
+				if(edge1.matchesColor(color)) {
+					return true;
+				}
+				return false;
+			}
+			index++;
+		}
+		return false;
 	}
 	
 	public int findCorner(int[] colors) {

@@ -5,12 +5,12 @@ public class AlgorithmMap {
 	public static String[] rotatePerspectiveLeft = {
 			"F","R",
 			"F'","R'",
-			"R","B",
-			"R'","B'",
-			"B","L",
-			"B'","L'",
-			"L","F",
-			"L'","F'",
+			"R","B'",
+			"R'","B",
+			"B","L'",
+			"B'","L",
+			"L","F'",
+			"L'","F",
 			
 			"F2","R2",
 			"R2","B2",
@@ -84,7 +84,6 @@ public class AlgorithmMap {
 		for(int i = 0; i < algorithm.length; i ++) {
 			
 			for(int j = 0; j < map.length; j += 2) {
-				System.out.println("HII");
 				if(algorithm[i].equals(map[j])) {
 					algorithm[i] = map[j + 1];
 					

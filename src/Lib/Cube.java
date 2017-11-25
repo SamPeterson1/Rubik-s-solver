@@ -111,7 +111,6 @@ public class Cube {
 		} else if(value < 13) {
 			face = value - 7;
 			direction = 1;
-			System.out.println("LOLOL");
 		} else if(value < 19) {
 			face = value - 13; 
 			direction = 2;
@@ -155,7 +154,6 @@ public class Cube {
 						this.setCube(Map.applyMap(this.getCube(), Map.upCounterClockwiseMap));
 					}
 				} else if(face == 1) {
-					System.out.println("HIijijijiiiiiiii");
 					if(direction == 0) {
 						this.setCube(Map.applyMap(this.getCube(), Map.rightClockwiseMap));
 					} else {
@@ -183,7 +181,6 @@ public class Cube {
 					if(direction == 0) {
 						this.setCube(Map.applyMap(this.getCube(), Map.downClockwiseMap));
 					} else {
-						System.out.println("HII" + face);
 						this.setCube(Map.applyMap(this.getCube(), Map.downCounterClockwiseMap));
 					}
 				} 
@@ -264,7 +261,6 @@ public class Cube {
 						this.setCube(Map.applyMap(this.getCube(), Map.downClockwiseMap));
 						this.setCube(Map.applyMap(this.getCube(), Map.equatorSliceCounterClockwiseMap));
 					} else {
-						System.out.println("HII" + face);
 						this.setCube(Map.applyMap(this.getCube(), Map.downCounterClockwiseMap));
 						this.setCube(Map.applyMap(this.getCube(), Map.equatorSliceClockwiseMap));
 					}

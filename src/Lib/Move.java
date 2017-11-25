@@ -20,7 +20,6 @@ public class Move {
 			retVal = retVal.replace("'", "");
 		} else if(!retVal.contains("2")){
 			retVal += "'";
-			System.out.println("MAYBEEE");
 		}
 		return retVal;
 	}

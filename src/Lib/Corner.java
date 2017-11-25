@@ -12,6 +12,9 @@ public class Corner {
 	}
 	
 	public boolean matches(int[] colors) {
-		return this.colors.equals(colors);
+		if(colors[0] == this.colors[0] & colors[1] == this.colors[1] & colors[2] == this.colors[2]) {
+			return true;
+		}
+		return false;
 	}
 }
