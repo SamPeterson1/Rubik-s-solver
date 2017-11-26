@@ -5,12 +5,12 @@ public class AlgorithmMap {
 	public static String[] rotatePerspectiveLeft = {
 			"F","R",
 			"F'","R'",
-			"R","B'",
-			"R'","B",
-			"B","L'",
-			"B'","L",
-			"L","F'",
-			"L'","F",
+			"R","B",
+			"R'","B'",
+			"B","L",
+			"B'","L'",
+			"L","F",
+			"L'","F'",
 			
 			"F2","R2",
 			"R2","B2",

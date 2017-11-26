@@ -12,13 +12,14 @@ public class FaceUtils {
 	
 	int[] edgeCoords = null;
 	int[] surroundingFaces = null;
+	int[] cornerCoords = null;
 	
 	
 	private int center = 0;
 	
 	private int face = 0;
 	
-	public FaceUtils(int face, int[] surroundingFaces, int[][][] cube, int[] edgeCoords) {
+	public FaceUtils(int face, int[] surroundingFaces, int[][][] cube, int[] edgeCoords, int[] cornerCoords) {
 		this.face = face;
 		
 		/*
@@ -28,6 +29,7 @@ public class FaceUtils {
 		 * 
 		*/
 		this.edgeCoords = Arrays.copyOf(edgeCoords, edgeCoords.length);
+		this.cornerCoords = Arrays.copyOf(cornerCoords, cornerCoords.length);
 		this.surroundingFaces = Arrays.copyOf(surroundingFaces, surroundingFaces.length);
 		center = cube[face][1][1];
 		int[] edgeColors = new int[2];
@@ -55,24 +57,24 @@ public class FaceUtils {
 		edges.add(edge4);
 		
 		cornerColors[0] = cube[face][2][2];
-		cornerColors[1] = cube[surroundingFaces[0]][0][0];
-		cornerColors[2] = cube[surroundingFaces[1]][0][2];
-		corner1 = new Corner(cornerColors);
+		cornerColors[1] = cube[surroundingFaces[0]][cornerCoords[0]][cornerCoords[1]];
+		cornerColors[2] = cube[surroundingFaces[1]][cornerCoords[2]][cornerCoords[3]];
+		corner1 = new Corner(cornerColors,0);
 		
 		cornerColors[0] = cube[face][2][0];
-		cornerColors[1] = cube[surroundingFaces[1]][0][0];
-		cornerColors[2] = cube[surroundingFaces[2]][0][2];
-		corner2 = new Corner(cornerColors);
+		cornerColors[1] = cube[surroundingFaces[1]][cornerCoords[4]][cornerCoords[5]];
+		cornerColors[2] = cube[surroundingFaces[2]][cornerCoords[6]][cornerCoords[7]];
+		corner2 = new Corner(cornerColors,1);
 		
 		cornerColors[0] = cube[face][0][0];
-		cornerColors[1] = cube[surroundingFaces[2]][0][0];
-		cornerColors[2] = cube[surroundingFaces[3]][0][2];
-		corner3 = new Corner(cornerColors);
+		cornerColors[1] = cube[surroundingFaces[2]][cornerCoords[8]][cornerCoords[9]];
+		cornerColors[2] = cube[surroundingFaces[3]][cornerCoords[10]][cornerCoords[11]];
+		corner3 = new Corner(cornerColors,2);
 		
 		cornerColors[0] = cube[face][0][2];
-		cornerColors[1] = cube[surroundingFaces[3]][0][0];
-		cornerColors[2] = cube[surroundingFaces[0]][0][2];
-		corner4 = new Corner(cornerColors);
+		cornerColors[1] = cube[surroundingFaces[3]][cornerCoords[12]][cornerCoords[13]];
+		cornerColors[2] = cube[surroundingFaces[0]][cornerCoords[14]][cornerCoords[15]];
+		corner4 = new Corner(cornerColors,3);
 		
 		corners.add(corner1);
 		corners.add(corner2);
@@ -109,24 +111,24 @@ public class FaceUtils {
 		
 		
 		cornerColors[0] = cube[face][2][2];
-		cornerColors[1] = cube[surroundingFaces[0]][0][0];
-		cornerColors[2] = cube[surroundingFaces[1]][0][2];
-		corner1 = new Corner(cornerColors);
+		cornerColors[1] = cube[surroundingFaces[0]][cornerCoords[0]][cornerCoords[1]];
+		cornerColors[2] = cube[surroundingFaces[1]][cornerCoords[2]][cornerCoords[3]];
+		corner1 = new Corner(cornerColors,0);
 		
 		cornerColors[0] = cube[face][2][0];
-		cornerColors[1] = cube[surroundingFaces[1]][0][0];
-		cornerColors[2] = cube[surroundingFaces[2]][0][2];
-		corner2 = new Corner(cornerColors);
+		cornerColors[1] = cube[surroundingFaces[1]][cornerCoords[4]][cornerCoords[5]];
+		cornerColors[2] = cube[surroundingFaces[2]][cornerCoords[6]][cornerCoords[7]];
+		corner2 = new Corner(cornerColors,1);
 		
 		cornerColors[0] = cube[face][0][0];
-		cornerColors[1] = cube[surroundingFaces[2]][0][0];
-		cornerColors[2] = cube[surroundingFaces[3]][0][2];
-		corner3 = new Corner(cornerColors);
+		cornerColors[1] = cube[surroundingFaces[2]][cornerCoords[8]][cornerCoords[9]];
+		cornerColors[2] = cube[surroundingFaces[3]][cornerCoords[10]][cornerCoords[11]];
+		corner3 = new Corner(cornerColors,2);
 		
 		cornerColors[0] = cube[face][0][2];
-		cornerColors[1] = cube[surroundingFaces[3]][0][0];
-		cornerColors[2] = cube[surroundingFaces[0]][0][2];
-		corner4 = new Corner(cornerColors);
+		cornerColors[1] = cube[surroundingFaces[3]][cornerCoords[12]][cornerCoords[13]];
+		cornerColors[2] = cube[surroundingFaces[0]][cornerCoords[14]][cornerCoords[15]];
+		corner4 = new Corner(cornerColors,3);
 	}
 	public int findEdge(int[] colors) {
 		int i = 0;
@@ -137,6 +139,15 @@ public class FaceUtils {
 			i ++;
 		}
 		return -1;
+	}
+	
+	public Corner getCorner(int ID) {
+		for(Corner corner: corners) {
+			if(corner.getID() == ID) {
+				return corner;
+			}
+		}
+		return null;
 	}
 	
 	public int findFlippedEdge(int color, int side) {

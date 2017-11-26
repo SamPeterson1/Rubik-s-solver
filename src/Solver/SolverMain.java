@@ -12,7 +12,9 @@ public class SolverMain {
 		canvas.addEventQueue(queue);
 		Cube cube = new Cube();
 		CrossSolver solver = new CrossSolver();
+		WhiteFaceSolver solver2 = new WhiteFaceSolver();
 		solver.setCube(cube);
+		solver2.setCube(cube);
 		while(true) {
 			
 			if(queue.isEventToProcess()) {
@@ -56,7 +58,7 @@ public class SolverMain {
 				} else if(event.getType() == SolverEvent.EVENT_KEY_PRESS & event.getKeyChar() == 'c') {
 					solver.test();
 				}  else if(event.getType() == SolverEvent.EVENT_KEY_PRESS & event.getKeyChar() == 'C') {
-					solver.flip();
+					solver2.test();
 				}
 			}
 			canvas.updateCubeData(cube.getCube());

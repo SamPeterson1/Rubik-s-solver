@@ -2,13 +2,19 @@ package Lib;
 
 public class Corner {
 	int[] colors = null;
+	int ID = 0;
 	
-	public Corner(int[] colors) {
+	public Corner(int[] colors, int ID) {
 		this.colors = colors.clone();
+		this.ID = ID;
 	}
 	
 	public int[] getColors() {
 		return this.colors;
+	}
+	
+	public int getID() {
+		return this.ID;
 	}
 	
 	public boolean matches(int[] colors) {

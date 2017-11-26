@@ -27,7 +27,7 @@ public final class SolverEvent {
 		this.setMouseLeftButton(false);
 		this.setMouseMiddleButton(false);
 		this.setMouseRightButton(false);
-		this.setKeyChar(event.getKeyChar());
+ 		this.setKeyChar(event.getKeyChar());
 		this.setKeyCode(event.getKeyCode());
 
 		return;
