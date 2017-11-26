@@ -139,6 +139,15 @@ public class FaceUtils {
 		return -1;
 	}
 	
+	public int findFlippedEdge(int color, int side) {
+		for(Edge edge: edges) {
+			if(edge.containsColor(side, color)) {
+				return edge.getID();
+			}
+		}
+		return -1;
+	}
+	
 	public int fineEdgeColor(int color) {
 		for(Edge edge: edges) {
 			if(edge.matchesColor(color)) {
@@ -146,6 +155,15 @@ public class FaceUtils {
 			}
 		}
 		return -1;
+	}
+	
+	public Edge getEdge(int ID) {
+		for(Edge edge:edges) {
+			if(edge.getID() == ID) {
+				return edge;
+			}
+		}
+		return null;
 	}
 	
 	public boolean isEdgePresent(int color, int edge) {

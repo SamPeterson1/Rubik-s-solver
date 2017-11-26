@@ -55,6 +55,8 @@ public class SolverMain {
 					canvas.updateCubeData(cube.getCube());
 				} else if(event.getType() == SolverEvent.EVENT_KEY_PRESS & event.getKeyChar() == 'c') {
 					solver.test();
+				}  else if(event.getType() == SolverEvent.EVENT_KEY_PRESS & event.getKeyChar() == 'C') {
+					solver.flip();
 				}
 			}
 			canvas.updateCubeData(cube.getCube());

@@ -29,6 +29,13 @@ public class Edge {
 		return this.colors.clone();
 	}
 	
+	public boolean containsColor(int side, int color) {
+		if(colors[side] == color) {
+			return true;
+		}
+		return false;
+	}
+	
 	public void setColors(int[] colors) {
 		this.colors = Arrays.copyOf(colors, colors.length);
 	}
