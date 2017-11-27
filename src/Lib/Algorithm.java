@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Algorithm {
 	ArrayList<Move> Moves = new ArrayList<Move>();
 	int length = 0;
+	int ID = 0;
 	
 	public Algorithm(String moves) {
 		String[] splitMoves = null;
@@ -13,6 +14,14 @@ public class Algorithm {
 		for(int i = 0; i < splitMoves.length; i ++) {
 			Moves.add(new Move(splitMoves[i]));
 		}
+	}
+	
+	public void setID(int ID) {
+		this.ID = ID;
+	}
+	
+	public int getID() {
+		return this.ID;
 	}
 	
 	public void rotatePerspectiveLeft() {
@@ -28,12 +37,16 @@ public class Algorithm {
 		}
 	}
 	
+	public void addMoves(String[] moves) {
+		for(int i = 0; i < moves.length; i ++) {
+			Moves.add(new Move(moves[i]));
+			length ++;
+		}
+	}
+	
 	public void rotatePerspectiveRight() {
 		String[] moves = this.getMovesAsString();
 		moves = AlgorithmMap.applyMap(moves, AlgorithmMap.rotatePerspectiveRight);
-		for(int i = 0; i < moves.length; i ++) {
-			System.out.println(moves[i]);
-		}
 		int i = 0;
 		for(Move move: Moves) {
 			move.setMove(moves[i]);

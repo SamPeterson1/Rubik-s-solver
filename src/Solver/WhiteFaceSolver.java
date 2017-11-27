@@ -2,6 +2,7 @@ package Solver;
 
 import java.util.ArrayList;
 
+import Lib.Algorithm;
 import Lib.Corner;
 import Lib.Cube;
 import Lib.FaceUtils;
@@ -39,9 +40,85 @@ public class WhiteFaceSolver {
 			centerFaces.add(orangeFace);
 			firstTime = false;
 		}
-		
-		Corner activeCorner = blueFace.getCorner(0);
-		System.out.println(activeCorner.getColors()[0]);
+		int[][] colors3 = {{3,2,6},{2,5,6},{5,4,6},{4,3,6}};
+		int in = 0;
+		Algorithm insertSide = new Algorithm("F' U' F");
+		Algorithm insertTop = new Algorithm("F' U F U U F' U' F");
+		Algorithm insertFront = new Algorithm("R U R'");
+		for(FaceUtils blueFace1: centerFaces) {
+		in ++;
+		blueFace1.updateUtil(cube.getCube());
+		Corner bottomCorner = blueFace1.getCorner(1);
+		Corner activeCorner = blueFace1.getCorner(0);
+		int[] colors = colors3[in - 1];
+		System.out.println(bottomCorner.getColors()[0] + " " + bottomCorner.getColors()[1] + " l " + bottomCorner.getColors()[2]);
+		if(bottomCorner.contains(6) & !bottomCorner.matches(colors)) {
+			System.out.println("HIIII");
+			insertSide.reverseAlgorithm();
+			cube.excecuteAlg(insertSide);
+			insertSide.reverseAlgorithm();
+		}
+		int[] colors2 = colors3[in - 1];
+		boolean search = false;
+		do {
+			int index = 0;
+			search = false;
+			blueFace1.updateUtil(cube.getCube());
+			if(!bottomCorner.matches(colors2)) {
+				while(!activeCorner.matchesColorCommutative(colors2)) {
+					index ++;
+					if(index > 4) {
+						search = true;
+						break;
+					}
+					cube.excecuteMove(Cube.TOP_FACE_C);
+					System.out.println(activeCorner.getColors()[0] + " " + activeCorner.getColors()[1] + " " + activeCorner.getColors()[2]);
+					blueFace1.updateUtil(cube.getCube());
+					
+				}
+				Algorithm Itop = new Algorithm("R U R'");
+				if(search) {
+					for(FaceUtils util: centerFaces) {
+						if(util.getCorner(1).matchesColorCommutative(colors2)) {
+							cube.excecuteAlg(Itop);
+							System.out.println("HILOOOOOOOOOOOOOOO");
+							break;
+						}
+						Itop.rotatePerspectiveLeft();
+					}
+					
+				}
+				for(FaceUtils util: centerFaces) {
+					util.updateUtil(cube.getCube());
+				}
+			}
+		} while (search);
+		blueFace1.updateUtil(cube.getCube());
+		int whiteLocation = 0;
+		for(whiteLocation = 0; whiteLocation < 3; whiteLocation ++) {
+			if(activeCorner.getColors()[whiteLocation] == 6) {
+				break;
+			}
+		}
+		if(!bottomCorner.matches(colors2)) {
+			System.out.println("NOOOOOOOOOOOOOOOOOOOOOOOO");
+			switch(whiteLocation) {
+				case 0:
+					cube.excecuteAlg(insertSide);
+					break;
+				case 1:
+					cube.excecuteAlg(insertTop);
+					break;
+				case 2:
+					cube.excecuteAlg(insertFront);
+					break;
+			}
+		}
+		System.out.println(whiteLocation);
+		insertSide.rotatePerspectiveLeft();
+		insertTop.rotatePerspectiveLeft();
+		insertFront.rotatePerspectiveLeft();
+		}
 	}
 	
 	public void setCube(Cube cube) {

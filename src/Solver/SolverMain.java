@@ -1,5 +1,6 @@
 package Solver;
 
+import Lib.Algorithm;
 import Lib.Cube;
 
 public class SolverMain {
@@ -13,8 +14,11 @@ public class SolverMain {
 		Cube cube = new Cube();
 		CrossSolver solver = new CrossSolver();
 		WhiteFaceSolver solver2 = new WhiteFaceSolver();
+		SecondEdgeSolver solver3 = new SecondEdgeSolver();
+		OllRecognizer recog = new OllRecognizer();
 		solver.setCube(cube);
 		solver2.setCube(cube);
+		solver3.setCube(cube);
 		while(true) {
 			
 			if(queue.isEventToProcess()) {
@@ -59,6 +63,27 @@ public class SolverMain {
 					solver.test();
 				}  else if(event.getType() == SolverEvent.EVENT_KEY_PRESS & event.getKeyChar() == 'C') {
 					solver2.test();
+				} else if(event.getType() == SolverEvent.EVENT_KEY_PRESS & event.getKeyChar() == 'z') {
+					solver3.test();
+				} else if(event.getType() == SolverEvent.EVENT_KEY_PRESS & event.getKeyChar() == 'o') {
+					Algorithm alg = new Algorithm(" ");
+					int i = recog.findCase(cube.getCube(), alg);
+					for(int i2 = 0; i2 < i; i2 ++) {
+						cube.excecuteMove(Cube.TOP_FACE_C);
+					}
+					cube.excecuteAlg(alg);
+				} else if(event.getType() == SolverEvent.EVENT_KEY_PRESS & event.getKeyChar() == 'S') {
+					solver.test();
+					solver2.test();
+					solver3.test();
+					Algorithm alg = new Algorithm(" ");
+					int i = recog.findCase(cube.getCube(), alg);
+					for(int i2 = 0; i2 < i; i2 ++) {
+						cube.excecuteMove(Cube.TOP_FACE_C);
+					}
+					cube.excecuteAlg(alg);
+				} else if(event.getType() == SolverEvent.EVENT_KEY_PRESS & event.getKeyChar() == 'E') {
+					cube.excecuteMove(Cube.MIDDLE_SLICE_C);
 				}
 			}
 			canvas.updateCubeData(cube.getCube());

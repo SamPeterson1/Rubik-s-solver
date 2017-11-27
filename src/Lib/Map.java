@@ -25,7 +25,7 @@ public class Map {
 			};
 	public static int[] downCounterClockwiseMap = {4,2,0,1,2,0,4,2,1,1,2,1,4,2,2,1,2,2,3,2,0,4,2,0,3,2,1,4,2,1,3,2,2,4,2,2,2,2,0,3,2,0,2,2,1,3,2,1,2,2,2,3,2,2,1,2,0,2,2,0,1,2,1,2,2,1,1,2,2,2,2,2,};
 	
-	public static int[] middleSliceClockwiseMap = {0,0,1,4,2,1,0,1,1,4,1,1,0,2,1,4,2,1,4,2,1,5,0,1,4,1,1,5,1,1,4,0,1,5,2,1,5,0,1,2,0,1,5,1,1,2,1,1,5,2,1,2,2,1,2,0,1,0,0,1,2,1,1,0,1,1,2,2,1,0,2,1};
+	public static int[] middleSliceClockwiseMap = {0,0,1,4,2,1,0,1,1,4,1,1,0,2,1,4,2,1,4,2,1,5,0,1,4,1,1,5,1,1,4,0,1,5,2,1,5,0,1,2,0,1,5,1,1,2,1,1,5,2,1,2,2,1,2,0,1,0,0,1,2,1,1,0,1,1,2,2,1,0,2,1,4,0,1,4,0,1,5,2,1};
 	public static int[] middleSliceCounterClockwiseMap = {4,2,1,0,0,1,4,1,1,0,1,1,4,2,1,0,2,1,5,0,1,4,2,1,5,1,1,4,1,1,5,2,1,4,0,1,2,0,1,5,0,1,2,1,1,5,1,1,2,2,1,5,2,1,0,0,1,2,0,1,0,1,1,2,1,1,0,2,1,2,2,1};
 	
 	public static int[] sideSliceClockwiseMap = {0,1,0,1,0,1,0,1,1,1,1,1,0,1,2,1,2,1,1,0,1,5,1,2,1,1,1,5,1,1,1,2,1,5,1,0,5,1,2,3,2,1,5,1,1,3,1,1,5,1,0,3,0,1,3,2,1,0,1,0,3,1,1,0,1,1,3,0,1,0,1,2,};
@@ -73,22 +73,9 @@ public class Map {
 			int j = i * 3;
 			backup[i] = colorData[map[j]][map[j + 1]][map[j + 2]];
 		}
-		for(int i = 0; i < backup.length; i ++) {
-		System.out.println(backup[i]);
-		}
 		for(int i = 3; i < map.length; i += 6) {
-			System.out.println("HI");
 			colorData[map[i]][map[i + 1]][map[i + 2]] = backup[i/3 - 1];
 		}
-		for(int i = 0; i < 6; i ++) { 
-			System.out.println(" ");
-			for(int j = 0; j < 3; j ++) {
-				System.out.println(" ");
-				for(int k = 0; k < 3; k ++) {
-					System.out.print(colorData[i][j][k]);
-				}
-			}
-		}
 		return colorData;
-	}
-}
+	} 
+} 

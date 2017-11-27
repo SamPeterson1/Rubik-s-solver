@@ -117,7 +117,7 @@ public class Move {
 			case "S2":
 				return Cube.SIDE_SLICE_TWICE;
 			default:
-				System.err.println("Invalid Notation");
+				System.err.println("Invalid Notation" + this.Notation);
 				return 13; 
 		}
 	}

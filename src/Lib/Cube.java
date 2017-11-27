@@ -96,7 +96,7 @@ public class Cube {
 		int[] data = alg.getMoves();
 		for(int i = 0; i < data.length; i ++) {
 			this.excecuteMove(data[i]);
-		}
+		} 
 	}
 	
 	public void excecuteMove(int value) {
