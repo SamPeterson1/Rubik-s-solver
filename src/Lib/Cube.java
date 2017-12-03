@@ -286,6 +286,18 @@ public class Cube {
 	    return Arrays.copyOf(ret, ret.length);
 	}
 	
+	public void printCube() {
+		for(int i = 0; i < 6; i ++) {
+			System.out.println("");
+			for(int j = 0; j < 3; j ++) {
+				System.out.println("");
+				for(int k = 0; k < 3; k ++) {
+					System.out.print(colorData[i][j][k]);
+				}
+			}
+		}
+	}
+	
 	public int[][][] getCube(){
 		return this.colorData;
 	}

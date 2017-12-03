@@ -26,7 +26,7 @@ public class OllRecognizer {
 		addAlg("f R U R' U' f' U F R U R' U' F'");
 		addAlg("R U R' U R' F R F' U2 R' F R F'");
 		addAlg("M U R U R' U' M2 U R U' r'");
-		addAlg("F R U R' U U' d R' U2 R' F R F'");
+		addAlg("F R U R' U U' d R' U2 R' F R F' U d'");
 		addAlg("r' R U R U R' U' r R2 F R F'");
 		addAlg("R' U' R' F R F' U R");
 		addAlg("R U R2 U' R' F R U R U' F'");
@@ -38,7 +38,7 @@ public class OllRecognizer {
 		addAlg("R' U' R' F R F' R' F R F' U R");
 		addAlg("r U R' U R U' R' U R U2 r'");
 		addAlg("l' U' L U' L' U L U' L' U2 l");
-		addAlg("R' F R' F' R2 U2 U d' R' F R F'");
+		addAlg("R' F R' F' R2 U2 U d' R' F R F' U' d");
 		addAlg("R' F R2 B' R2 F' R2 B R'");
 		addAlg("f R U R' U' f'");
 		addAlg("f' L' U' L U f");
@@ -56,8 +56,8 @@ public class OllRecognizer {
 		addAlg("R U2 R2 F R F' R U2 R'");
 		addAlg("R U R' U R' F R F' R U2 R'");
 		addAlg("R U R' U' R' F R2 U R' U' F'");
-		addAlg("r U' r' U' r U r' U d' R' U R");
-		addAlg("R' F R U R' F' R U d' R U' R'");
+		addAlg("r U' r' U' r U r' U d' R' U R U' d");
+		addAlg("R' F R U R' F' R U d' R U' R' U' d");
 		addAlg("r U r' R U R' U' r U' r'");
 		addAlg("l' U' l L' U' L U l' U l");
 		addAlg("R' F R U R' U' F' U R");
@@ -65,7 +65,7 @@ public class OllRecognizer {
 		addAlg("R U2 R' U2 R' F R F'");
 		addAlg("r U R' U R U2 r'");
 		addAlg("F R U R' U' F' U F R U R' U' F'");
-		addAlg("F' L' U' L U F U d' F R U R' U' F'");
+		addAlg("F' L' U' L U F U d' F R U R' U' F' U' d");
 		addAlg("r U2 R' U' R U' r'");
 		addAlg("l' U2 L U L' U l");
 		addAlg("M' U M U2 M' U M");

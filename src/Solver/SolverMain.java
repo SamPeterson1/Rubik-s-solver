@@ -2,6 +2,7 @@ package Solver;
 
 import Lib.Algorithm;
 import Lib.Cube;
+import Lib.Map;
 
 public class SolverMain {
 	public static void main(String args[]) {
@@ -16,6 +17,7 @@ public class SolverMain {
 		WhiteFaceSolver solver2 = new WhiteFaceSolver();
 		SecondEdgeSolver solver3 = new SecondEdgeSolver();
 		OllRecognizer recog = new OllRecognizer();
+		PllRecognizer pllRecog = new PllRecognizer();
 		solver.setCube(cube);
 		solver2.setCube(cube);
 		solver3.setCube(cube);
@@ -81,9 +83,12 @@ public class SolverMain {
 					for(int i2 = 0; i2 < i; i2 ++) {
 						cube.excecuteMove(Cube.TOP_FACE_C);
 					}
-					cube.excecuteAlg(alg);
+					cube.setCube(pllRecog.findCase(cube).getCube());
+					
 				} else if(event.getType() == SolverEvent.EVENT_KEY_PRESS & event.getKeyChar() == 'E') {
-					cube.excecuteMove(Cube.MIDDLE_SLICE_C);
+					cube.setCube(Map.applyMap(cube.getCube(), Map.equatorSliceCounterClockwiseMap));
+				} else if(event.getType() == SolverEvent.EVENT_KEY_PRESS & event.getKeyChar() == 'p') {
+					cube.setCube(pllRecog.findCase(cube).getCube());
 				}
 			}
 			canvas.updateCubeData(cube.getCube());
