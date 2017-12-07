@@ -1,7 +1,6 @@
 package Solver;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import Lib.Algorithm;
 import Lib.Cube;
@@ -38,40 +37,36 @@ public class CrossSolver {
 			centerFaces.add(orangeFace);
 			firstTime = false;
 		}
-		int index = 0;
 		Algorithm alg = new Algorithm("F");	
 		for(FaceUtils util: centerFaces) {
 			util.updateUtil(cube.getCube());
 			while(true) {
-				System.out.println("STUCKKKKK");
 				int iter = 0;
 				while(util.fineEdgeColor(6) == 0) {
-					if(iter > 3) {
+					if(iter > 4) {
 						break;
 					}
-					cube.excecuteMove(Cube.TOP_FACE_C);
+					cube.excecuteMove(Cube.TOP_FACE_C, true);
 					util.updateUtil(cube.getCube());
 					iter ++;
 				}
 				if(util.fineEdgeColor(6) == 1) {
-					cube.excecuteAlg(alg);
+					cube.excecuteAlg(alg, true);
 					util.updateUtil(cube.getCube());
 				} else if(util.fineEdgeColor(6) == 3){
 					alg.reverseAlgorithm();
-					cube.excecuteAlg(alg);
+					cube.excecuteAlg(alg, true);
 					util.updateUtil(cube.getCube());
 					alg.reverseAlgorithm();
 				} else if(util.fineEdgeColor(6) == 2) {
-					cube.excecuteAlg(alg);
-					cube.excecuteAlg(alg);
+					cube.excecuteAlg(alg, true);
+					cube.excecuteAlg(alg, true);
 					util.updateUtil(cube.getCube());
 				} else {
 					break;
 				}
 			}
-			alg.rotatePerspectiveLeft();	
-			index ++;
-			
+			alg.rotatePerspectiveLeft();			
 		}
 		
 		int[] i5 = {4,1,2,3};
@@ -81,12 +76,9 @@ public class CrossSolver {
 		FaceUtils YellowFace = new FaceUtils(0,i5,cube.getCube(),coords5,corners5);
 		for(int i1 = 0; i1 < 4; i1 ++) {
 			if(YellowFace.getEdge(2).getColors()[1] == 6) {
-				cube.excecuteAlg(edgeFlip);
-				System.out.println("FLIPPPPP");
-			} else {
-				System.out.println("FAILLLLLL" + YellowFace.getEdge(2).getColors()[1]);
+				cube.excecuteAlg(edgeFlip, true);
 			}
-			cube.excecuteMove(Cube.TOP_FACE_C);
+			cube.excecuteMove(Cube.TOP_FACE_C, true);
 			YellowFace.updateUtil(cube.getCube());
 		}
 		Algorithm bringDown = new Algorithm("F F");
@@ -97,11 +89,10 @@ public class CrossSolver {
 				if(blueFace1.getEdge(0).getColors()[0] == colors[0] & blueFace1.getEdge(0).getColors()[1] == colors[1]) {
 					break;
 				}
-				System.out.println(blueFace1.getEdge(0).getColors()[0] + " " + blueFace1.getEdge(0).getColors()[1]);
-				cube.excecuteMove(Cube.TOP_FACE_C);
+				cube.excecuteMove(Cube.TOP_FACE_C, true);
 				blueFace1.updateUtil(cube.getCube());
 			}
-			cube.excecuteAlg(bringDown);
+			cube.excecuteAlg(bringDown, true);
 			bringDown.rotatePerspectiveLeft();
 			blueFace1.updateUtil(cube.getCube());
 		}

@@ -51,11 +51,9 @@ public class WhiteFaceSolver {
 		Corner bottomCorner = blueFace1.getCorner(1);
 		Corner activeCorner = blueFace1.getCorner(0);
 		int[] colors = colors3[in - 1];
-		System.out.println(bottomCorner.getColors()[0] + " " + bottomCorner.getColors()[1] + " l " + bottomCorner.getColors()[2]);
 		if(bottomCorner.contains(6) & !bottomCorner.matches(colors)) {
-			System.out.println("HIIII");
 			insertSide.reverseAlgorithm();
-			cube.excecuteAlg(insertSide);
+			cube.excecuteAlg(insertSide, true);
 			insertSide.reverseAlgorithm();
 		}
 		int[] colors2 = colors3[in - 1];
@@ -71,8 +69,7 @@ public class WhiteFaceSolver {
 						search = true;
 						break;
 					}
-					cube.excecuteMove(Cube.TOP_FACE_C);
-					System.out.println(activeCorner.getColors()[0] + " " + activeCorner.getColors()[1] + " " + activeCorner.getColors()[2]);
+					cube.excecuteMove(Cube.TOP_FACE_C, true);
 					blueFace1.updateUtil(cube.getCube());
 					
 				}
@@ -80,8 +77,7 @@ public class WhiteFaceSolver {
 				if(search) {
 					for(FaceUtils util: centerFaces) {
 						if(util.getCorner(1).matchesColorCommutative(colors2)) {
-							cube.excecuteAlg(Itop);
-							System.out.println("HILOOOOOOOOOOOOOOO");
+							cube.excecuteAlg(Itop, true);
 							break;
 						}
 						Itop.rotatePerspectiveLeft();
@@ -101,20 +97,18 @@ public class WhiteFaceSolver {
 			}
 		}
 		if(!bottomCorner.matches(colors2)) {
-			System.out.println("NOOOOOOOOOOOOOOOOOOOOOOOO");
 			switch(whiteLocation) {
 				case 0:
-					cube.excecuteAlg(insertSide);
+					cube.excecuteAlg(insertSide, true);
 					break;
 				case 1:
-					cube.excecuteAlg(insertTop);
+					cube.excecuteAlg(insertTop, true);
 					break;
 				case 2:
-					cube.excecuteAlg(insertFront);
+					cube.excecuteAlg(insertFront, true);
 					break;
 			}
 		}
-		System.out.println(whiteLocation);
 		insertSide.rotatePerspectiveLeft();
 		insertTop.rotatePerspectiveLeft();
 		insertFront.rotatePerspectiveLeft();

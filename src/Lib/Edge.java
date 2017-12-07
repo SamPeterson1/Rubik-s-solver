@@ -19,7 +19,7 @@ public class Edge {
 	}
 	
 	public boolean matchesColor(int color) {
-		if(this.colors[0] == color | this.colors[1] == color) {
+		if(this.colors[0] == color || this.colors[1] == color) {
 			return true;
 		}
 		return false;

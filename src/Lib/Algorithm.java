@@ -24,18 +24,26 @@ public class Algorithm {
 		return this.ID;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public void setMoves(ArrayList<Move> moves) {
+		this.Moves = (ArrayList<Move>) moves.clone();
+		this.length = moves.size();
+	}
+	
+	public ArrayList<Move> getMovesList() {
+		return this.Moves;
+	}
+	
 	public void rotatePerspectiveLeft() {
 		String[] moves = this.getMovesAsString();
 		moves = AlgorithmMap.applyMap(moves, AlgorithmMap.rotatePerspectiveLeft);
-		for(int i = 0; i < moves.length; i ++) {
-			System.out.println(moves[i]);
-		}
 		int i = 0;
 		for(Move move: Moves) {
 			move.setMove(moves[i]);
 			i ++;
 		}
 	}
+	
 	
 	public void addMoves(String[] moves) {
 		for(int i = 0; i < moves.length; i ++) {
@@ -68,6 +76,7 @@ public class Algorithm {
 		return retVal;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void reverseAlgorithm() {
 		for(Move move: Moves) {
 			move.setMove(move.getInverse(move.getNotation()));

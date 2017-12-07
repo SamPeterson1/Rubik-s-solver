@@ -1,10 +1,11 @@
 package Lib;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Cube {
 	private int[][][] colorData = new int[6][3][3];
-	
+	ArrayList<Integer> moves = new ArrayList<Integer>();
 	//TOP, RIGHT, FRONT, LEFT, BACK, BOTTOM
 	
 	public static final int YELLOW = 1;
@@ -92,18 +93,60 @@ public class Cube {
 		}
 	}
 	
-	public void excecuteAlg(Algorithm alg) {
+	public void excecuteAlg(Algorithm alg, boolean addToMovesList) {
 		int[] data = alg.getMoves();
 		for(int i = 0; i < data.length; i ++) {
-			this.excecuteMove(data[i]);
+			this.excecuteMove(data[i], addToMovesList);
 		} 
 	}
 	
-	public void excecuteMove(int value) {
+	public void addMovesToList(Algorithm alg) {
+		int[] i = alg.getMoves();
+		for(int j = 0; j < i.length; j ++) {
+			moves.add(i[j]);
+		}
+	}
+	
+	public void printSolution() {
+		for(Integer i: moves) {
+			System.out.println(Move.get(i));
+		}
+		System.out.println(moves.size());
+	}
+	
+	public Algorithm getSolutionAlg() {
+		StringBuilder strB = new StringBuilder("");
+		int index = 0;
+		for(Integer i: moves) {
+			index ++;
+			strB.append(Move.get(i));
+			if(!(index == moves.size())) {
+				strB.append(" ");
+			}
+		}
+		return new Algorithm(strB.toString());
+	}
+	
+	public void print() {
+		for(int i2 = 0; i2 < 6; i2 ++) {
+			System.out.println("");
+			for(int j = 0; j < 3; j ++) {
+				System.out.println("");
+				for(int k = 0; k < 3; k ++) {
+					System.out.print(colorData[i2][j][k]);
+				}
+			}
+		}
+	}
+	
+	public void excecuteMove(int value, boolean addToMovesList) {
 		int face = 0;
 		int direction = 0;
 		int sliceMove = 0;
 		boolean basicMove = true;
+		if(addToMovesList) {
+			moves.add(value);
+		}
 		if(value < 7) {
 			face = value - 1;
 			direction = 0;
@@ -186,8 +229,7 @@ public class Cube {
 				} 
 			}
 		} else if(face == -1){
-			int iterations = 1,k = 1;
-			if(direction == 1) k += 2;
+			int iterations = 1;
 			if(direction == 2) iterations ++;
 			for(int i = 0; i < iterations; i ++) {
 				if(sliceMove == 0) {
@@ -284,18 +326,6 @@ public class Cube {
 		    	mat = ret;
 		}
 	    return Arrays.copyOf(ret, ret.length);
-	}
-	
-	public void printCube() {
-		for(int i = 0; i < 6; i ++) {
-			System.out.println("");
-			for(int j = 0; j < 3; j ++) {
-				System.out.println("");
-				for(int k = 0; k < 3; k ++) {
-					System.out.print(colorData[i][j][k]);
-				}
-			}
-		}
 	}
 	
 	public int[][][] getCube(){

@@ -25,13 +25,13 @@ public class OllRecognizer {
 		addAlg("f R U R' U' f' U' F R U R' U' F'");
 		addAlg("f R U R' U' f' U F R U R' U' F'");
 		addAlg("R U R' U R' F R F' U2 R' F R F'");
-		addAlg("M U R U R' U' M2 U R U' r'");
+		addAlg("M' U R U R' U' M2 U R U' r'");
 		addAlg("F R U R' U U' d R' U2 R' F R F' U d'");
 		addAlg("r' R U R U R' U' r R2 F R F'");
 		addAlg("R' U' R' F R F' U R");
 		addAlg("R U R2 U' R' F R U R U' F'");
 		addAlg("R U2 R2 U' R U' R' U2 F R F'");
-		addAlg("R U R' U R d' R U' R' F'");
+		addAlg("R U R' U R d' R U' R' F' d");
 		addAlg("f R U R' U' R U R' U' f'");
 		addAlg("F R U R' U' R F' r U R' U' r'");
 		addAlg("F R U R' U' R U R' U' F'");
@@ -49,15 +49,15 @@ public class OllRecognizer {
 		addAlg("R U R' U R U' R' U' R' F R F'");
 		addAlg("L' U' L U' L' U L U L F' L' F");
 		addAlg("R2 U R' B' R U' R2 U R B R'");
-		addAlg("M U R U R' U' R' F R F' M'");
-		addAlg("R U' R' U2 R U2 d R U' R' U' F'");
-		addAlg("R' U2 R U R' U R U D' F R U R' U' F'");
+		addAlg("M' U R U R' U' R' F R F' M");
+		addAlg("R U' R' U2 R U2 d' R U' R' U' F' U' d");
+		addAlg("R' U2 R U R' U R U d' F R U R' U' F' U' d");
 		addAlg("F R U' R' U' R U R' F'");
 		addAlg("R U2 R2 F R F' R U2 R'");
 		addAlg("R U R' U R' F R F' R U2 R'");
 		addAlg("R U R' U' R' F R2 U R' U' F'");
-		addAlg("r U' r' U' r U r' U d' R' U R U' d");
-		addAlg("R' F R U R' F' R U d' R U' R' U' d");
+		addAlg("r U' r' U' r U r' U' d R' U R U d'");
+		addAlg("R' F R U R' F' R U' d R U' R' U d'");
 		addAlg("r U r' R U R' U' r U' r'");
 		addAlg("l' U' l L' U' L U l' U l");
 		addAlg("R' F R U R' U' F' U R");
@@ -68,14 +68,12 @@ public class OllRecognizer {
 		addAlg("F' L' U' L U F U d' F R U R' U' F' U' d");
 		addAlg("r U2 R' U' R U' r'");
 		addAlg("l' U2 L U L' U l");
-		addAlg("M' U M U2 M' U M");
-		addAlg("R U R' U' M' U R U' r'");
-		addAlg("r U R' U R U' R' U R U2 r'");
+		addAlg("M U M' U2 M U M'");
+		addAlg("R U R' U' M U R U' r'");
 	}
 	
 	public int findCase(int[][][] cube, Algorithm alg) {
 		boolean Break = false;
-		boolean firstTry = false;
 		int i1 = 0;
 		Cube activeCube = new Cube();
 		for(Algorithm test: algs) {
@@ -95,7 +93,7 @@ public class OllRecognizer {
 			for(i1 = 0; i1 < 4; i1 ++) {
 				int[][] solvedFace = {{1,1,1},{1,1,1},{1,1,1}};
 				activeCube.setCube(activeCubeData);
-				activeCube.excecuteAlg(test);
+				activeCube.excecuteAlg(test, false);
 				int k1 = 0;
 				for(int i4 = 0; i4 < 3; i4 ++) {
 					for(int j = 0; j < 3; j ++) {
@@ -106,9 +104,6 @@ public class OllRecognizer {
 				}
 				if(k1 == 9) {
 					alg.addMoves(test.getMovesAsString());
-					if(i1 == 0) {
-						firstTry = true;
-					}
 					Break = true;
 					break;
 				}
@@ -119,7 +114,7 @@ public class OllRecognizer {
 						}
 					}
 				}
-					activeCube.excecuteMove(Cube.TOP_FACE_C);
+					activeCube.excecuteMove(Cube.TOP_FACE_C, false);
 					int[][][] h = activeCube.getCube();
 					for(int i = 0; i < 6; i ++) {
 						for(int j = 0; j < 3; j ++) {
@@ -132,8 +127,6 @@ public class OllRecognizer {
 			}
 		}
 		int retval = i1;
-		
-		System.out.println("\n " + retval);
 		return retval;
 	}
 }

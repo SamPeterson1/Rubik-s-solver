@@ -2,14 +2,11 @@ package Solver;
 
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-import javax.swing.ImageIcon;
-
 public class SolverCanvas extends Canvas{
+	private static final long serialVersionUID = -6828443604112305057L;
 	public SolverCanvas() {
 		this.setBackground(Color.GRAY);
 	}
@@ -34,7 +31,6 @@ public class SolverCanvas extends Canvas{
 							g.setColor(Color.BLUE);
 							break;
 						case 4: 
-							float[] ji = {0};
 							g.setColor(Color.decode("#FF6F00"));
 							break;
 						case 5:

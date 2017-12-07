@@ -16,7 +16,6 @@ public class SecondEdgeSolver {
 		this.cube = cube;
 	}
 	
-	@SuppressWarnings("unlikely-arg-type")
 	public void test() {
 		int[] i = {0,1,5,3};
 		int[] coords = {2,1,1,0,0,1,1,2};
@@ -51,36 +50,27 @@ public class SecondEdgeSolver {
 			int[] colors = colors3[iter];
 			Edge middleEdge = blueFace1.getEdge(0);
 			boolean repeat = false;
-			boolean override = false;
 			do {
 				int iterations = 0;
 				repeat = false;
 				blueFace1.updateUtil(cube.getCube());
 				while(!middleEdge.matchesColorCommutative(colors)) {
 					if(iterations > 4) {
-						System.out.println("NOOOOOOOOOOO" + middleEdge.getColors()[0] + " " + middleEdge.getColors()[1]);
 						repeat = true;
 						break;
 					}
-					System.out.println(colors[0] + " FDSFGD " + colors[1]);
-					System.out.println("NOOOOOOOOOOO" + middleEdge.containsColor(colors[0])+ " " + middleEdge.containsColor(colors[1]) + " " + iter);
-					cube.excecuteMove(Cube.TOP_FACE_C);
+					cube.excecuteMove(Cube.TOP_FACE_C, true);
 					blueFace1.updateUtil(cube.getCube());
 					iterations ++;
 				}
-				System.out.println("HEEEEE" + repeat);
 				Algorithm alg = new Algorithm("U R U' R' U' F' U F");
 				if(repeat) {
 					for(FaceUtils util: centerFaces) {
-						System.out.println("LLLLLLLLLLLLLLLLLLLLLLLL");
 						util.updateUtil(cube.getCube());
 						if(util.getEdge(1).matchesColorCommutative(colors)) {
-							System.out.println("MATCHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
-							cube.excecuteAlg(alg);
+							cube.excecuteAlg(alg, true);
 							blueFace1.updateUtil(cube.getCube());
 							break;
-						} else {
-							System.out.println("RERKEFREKFKDFKD" + util.getEdge(1).getColors()[0] + " " + util.getEdge(1).getColors()[1] );
 						}
 						alg.rotatePerspectiveLeft();
 					}
@@ -92,9 +82,9 @@ public class SecondEdgeSolver {
 			} while(repeat);
 			blueFace1.updateUtil(cube.getCube());
 			if(middleEdge.containsColor(0, colors[1])) {
-				cube.excecuteAlg(insert2);
+				cube.excecuteAlg(insert2, true);
 			} else {
-				cube.excecuteAlg(insert1);
+				cube.excecuteAlg(insert1, true);
 			}
 			blueFace1.updateUtil(cube.getCube());
 			insert2.rotatePerspectiveLeft();

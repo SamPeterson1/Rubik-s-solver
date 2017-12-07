@@ -21,13 +21,6 @@ public class FaceUtils {
 	
 	public FaceUtils(int face, int[] surroundingFaces, int[][][] cube, int[] edgeCoords, int[] cornerCoords) {
 		this.face = face;
-		
-		/*
-		 * 
-		 * 	int[] i2 = {1,5,3,0};
-		 * 	int[] coords = {1,0,0,1,1,2,2,1};
-		 * 
-		*/
 		this.edgeCoords = Arrays.copyOf(edgeCoords, edgeCoords.length);
 		this.cornerCoords = Arrays.copyOf(cornerCoords, cornerCoords.length);
 		this.surroundingFaces = Arrays.copyOf(surroundingFaces, surroundingFaces.length);
@@ -80,12 +73,6 @@ public class FaceUtils {
 		corners.add(corner2);
 		corners.add(corner3);
 		corners.add(corner4);
-		
-		for(Edge edge: edges) {
-			System.out.println(edge.getColors()[0] + " " + edge.getColors()[1]);
-		}
-		
-			System.out.println(corner1.getColors()[0] + " " + corner1.getColors()[1] + " " + corner1.getColors()[2]);
 	}
 	public void updateUtil(int[][][] cube) {
 		int[] edgeColors = new int[2];
@@ -176,7 +163,6 @@ public class FaceUtils {
 	}
 	
 	public boolean isEdgePresent(int color, int edge) {
-		int index = 0;
 		for(Edge edge1: edges) {
 			if(edge1.getID() == edge) {
 				if(edge1.matchesColor(color)) {
@@ -184,7 +170,6 @@ public class FaceUtils {
 				}
 				return false;
 			}
-			index++;
 		}
 		return false;
 	}

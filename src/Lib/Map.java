@@ -1,7 +1,5 @@
 package Lib;
 
-import java.util.Arrays;
-
 public class Map {
 	public static int[] testMap = {
 			0,1,2,2,1,2,2,1,2,0,1,2
