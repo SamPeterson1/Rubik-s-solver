@@ -114,6 +114,10 @@ public class Cube {
 		System.out.println(moves.size());
 	}
 	
+	public void resetMoveHistory() {
+		moves = new ArrayList<Integer>();
+	}
+	
 	public Algorithm getSolutionAlg() {
 		StringBuilder strB = new StringBuilder("");
 		int index = 0;

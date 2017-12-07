@@ -44,7 +44,7 @@ public final class SolverEvent {
 			this.setMouseLeftButton(false);
 		}
 		if (event.getButton() == MouseEvent.BUTTON2) {
-			this.setMouseMiddleButton(true);
+			this.setMouseMiddleButton(true); 
 		} else {
 			this.setMouseMiddleButton(false);
 		}

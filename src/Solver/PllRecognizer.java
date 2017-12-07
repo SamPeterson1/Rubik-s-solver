@@ -1,11 +1,9 @@
 package Solver;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import Lib.Algorithm;
 import Lib.Cube;
-import Lib.Move;
 
 public class PllRecognizer {
 	ArrayList<Algorithm> algs = new ArrayList<Algorithm>();
@@ -28,11 +26,11 @@ public class PllRecognizer {
 		addAlg("U d' R2 u' R U' R U R' u R2 B U' B' U' d");
 		addAlg("B' U F' U2 B U' B' U2 F B U'");
 		addAlg("B U' F U2 B' U B U2 F' B' U");
-		addAlg("R U' L d2 L' U L R' U' R U2 r' F l' d2");
+		addAlg("R U' L d2 L' U L R' U' R U2 r' F l' d2 U'");
 		addAlg("F2 R' F' U' F' U F R F' U2 F U2 F'");
 		addAlg("B2 R B U B U' B' R' B U2 B' U2 B");
 		addAlg("R2 D' F2 D R2 B2 D L2 D' B2 U");
-		addAlg("R' U R' d' R' F' R2 U' R' U R' F R F d");
+		addAlg("R' U R' d' R' F' R2 U' R' U R' F R F d U");
 		addAlg("F2 U F U' F' U L F R' F R F L' F'");
 	}
 	
@@ -41,7 +39,6 @@ public class PllRecognizer {
 			System.out.println("HH");
 			if(this.testAlg(alg, cube)) {
 				System.out.println("yEs");
-				//cube.addMovesToList(alg);
 				return;
 			}
 		}
@@ -58,8 +55,8 @@ public class PllRecognizer {
 			cube.excecuteAlg(alg, false);
 			for(int i3 = 0; i3 < 4; i3 ++) {
 				int[][][] cubeState = null;
-				cube.excecuteMove(Cube.TOP_FACE_CC, false);
-				cubeState = this.clone(cube.getCube());
+				
+				cubeState = cube.getCube();
 				for(int i = 0; i < 6; i ++) {
 					for(int j = 0; j < 3; j ++) {
 						for(int k = 0; k < 3; k ++) {
@@ -75,12 +72,13 @@ public class PllRecognizer {
 						cube.excecuteMove(Cube.TOP_FACE_CC, false);
 					}
 					cube.addMovesToList(alg);
-					for(int i = 0; i < i3 + 1; i ++) {
+					for(int i = 0; i < i3; i ++) {
 						cube.excecuteMove(Cube.TOP_FACE_CC, true);
 						cube.excecuteMove(Cube.TOP_FACE_C, false);
 					}
-					return true;
+					return true; 
 				}
+				cube.excecuteMove(Cube.TOP_FACE_CC, false);
 				correctColors = 0;
 			}
 			

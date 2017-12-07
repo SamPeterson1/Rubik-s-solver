@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+
 public class SolverCanvas extends Canvas{
 	private static final long serialVersionUID = -6828443604112305057L;
 	public SolverCanvas() {
@@ -55,6 +56,7 @@ public class SolverCanvas extends Canvas{
 
 		return;
 	}
+	
 	public void updateCubeData(int[][][] cubeData) {
 		this.cubeData = cubeData;
 	}

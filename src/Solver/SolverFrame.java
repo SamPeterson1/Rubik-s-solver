@@ -9,7 +9,7 @@ public class SolverFrame {
 	private Frame frame;
 	public SolverFrame() {
 		frame = new Frame();
-		frame.setTitle("CubeDemon I");
+		frame.setTitle("CubeDemon I ");
 		frame.setSize(1500, 1020);
 		frame.addWindowListener(new WindowListener() {
 			@Override

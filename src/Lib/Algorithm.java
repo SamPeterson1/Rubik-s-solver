@@ -89,6 +89,12 @@ public class Algorithm {
 		}
 	}
 	
+	public void printMoves() {
+		for(Move move: Moves) {
+			System.out.println(move.getNotation());
+		}
+	}
+	
 	public int[] getMoves() {
 		int[] retval = new int[length];
 		int i = 0;
